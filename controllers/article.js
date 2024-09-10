@@ -8,12 +8,12 @@ class articleController {
 
     async getAllArticles(req, res) {
         const articles = await articleModel.findAll()
-        res.status(201).json({articles: articles})
+        res.status(200).json({articles: articles})
     } 
 
     async getArticleBySlug(req, res) {
         const article = await articleModel.findOne(req.params.slug)
-        res.status(201).json({article: article})
+        res.status(200).json({article: article})
     }
     
     async createNewArticle(req, res) {
@@ -41,10 +41,18 @@ class articleController {
                 updatedArticle[key] = updates[key];
             }
         }
-        const result = await articleModel.update(articleId, updatedArticle)
+        await articleModel.update(articleId, updatedArticle)
         res.status(200).json({
             message: `updated article with id ${articleId}`,
             article: {id: articleId, ...updatedArticle}
+        })
+    }
+
+    async deleteArticle(req, res) {
+        const articleId = req.params.id;
+        await articleModel.delete(articleId)
+        res.status(200).json({
+            message: `deleted article with id ${articleId}`
         })
     }
 } 
