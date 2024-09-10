@@ -25,7 +25,7 @@ class BaseSQLModel {
 
     async findById(id) {
         const query = `SELECT * FROM ${this.tableName} WHERE id = ?`
-        const results = await this.executeQuery(query,[id])
+        const results = await this.executeQuery(query, [id])
         return results[0]   
     } 
 

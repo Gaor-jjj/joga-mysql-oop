@@ -6,13 +6,10 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-const articleControllerClass = require('../controllers/article');
-const articleController = new articleControllerClass()
-
 const articleRoutes = require('../routes/articles');
 const authorRoutes = require('../routes/authors');
 app.use('/', articleRoutes);
-app.use('/author', authorRoutes);
+app.use('/', authorRoutes);
 
 // app start point 
 app.listen(3025, () => {
