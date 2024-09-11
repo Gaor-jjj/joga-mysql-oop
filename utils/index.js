@@ -17,9 +17,11 @@ app.use(sessions({
 const articleRoutes = require('../routes/articles');
 const authorRoutes = require('../routes/authors');
 const userRoutes = require('../routes/user');
+const adminRoutes = require('../routes/admin');
 app.use('/', articleRoutes);
 app.use('/', authorRoutes);
 app.use('/', userRoutes);
+app.use('/', adminRoutes);
 
 // app start point 
 app.listen(3025, () => {
