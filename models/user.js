@@ -14,6 +14,11 @@ class UserModel extends BaseSQLModel {
         const createdUser = await super.create(user)
         return createdUser
     }
+
+    async findOne(username) {
+        const user = await super.findOne('username', username)
+        return user
+    } 
 } 
 
 module.exports = UserModel
