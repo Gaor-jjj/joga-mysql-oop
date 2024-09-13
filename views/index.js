@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
+const path = require('path')
 const hbs = require('express-handlebars');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -13,6 +14,8 @@ app.engine('hbs', hbs.engine({
     defaultLayout: 'main',
     layoutsDir: __dirname + '/views/layouts/',
 }))
+
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
