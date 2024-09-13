@@ -4,6 +4,16 @@ const sessions = require('express-session')
 const bodyParser = require('body-parser')
 
 const app = express()
+
+const hbs = require('express-handlebars');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.engine('hbs', hbs.engine({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts/',
+}))
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
