@@ -27,10 +27,10 @@ app.use(sessions({
     resave: false
 }))
 
-const articleRoutes = require('../routes/articles');
-const authorRoutes = require('../routes/authors');
-const userRoutes = require('../routes/user');
-const adminRoutes = require('../routes/admin');
+const articleRoutes = require('./routes/articles');
+const authorRoutes = require('./routes/authors');
+const userRoutes = require('./routes/user');
+const adminRoutes = require('./routes/admin');
 app.use('/', articleRoutes);
 app.use('/', authorRoutes);
 app.use('/', userRoutes);
