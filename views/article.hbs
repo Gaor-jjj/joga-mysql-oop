@@ -1,13 +1,13 @@
 {{#article}}
-    <h1>{{name}}</h1>
-    <p><img src="/images/{{image}}" alt=""></p>
-    {{{body}}}
-    {{#if user}}
-        {{#ifEquals user.role 'admin'}}
-            <a href="/article/edit/{{id}}">Edit</a>
-            <form action="/article/delete/{{id}}" method="POST" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        {{/ifEquals}}
-    {{/if}}
+<h1>{{name}}</h1>
+<p><img src="/images/{{image}}" alt=""></p>
+{{{body}}}
 {{/article}}
+{{#isAdmin user}}
+    <form action="/article/edit/{{../article.id}}" method="GET" style="display: inline; margin-right: 10px;">
+        <button type="submit">Edit</button>
+    </form>
+    <form action="/article/delete/{{../article.id}}" method="POST" style="display: inline;">
+        <button class="danger" type="submit">Delete</button>
+    </form>
+{{/isAdmin}}

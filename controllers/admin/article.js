@@ -1,13 +1,17 @@
 const articleDbModel = require('../../models/article')
+const authorDbModel = require('../../models/author')
 const articleController = require('../article')
 const articleModel = new articleDbModel()
+const authorModel = new authorDbModel()
 
 class articleAdminController extends articleController {
 
+    async showCreateArticlePage(req, res) {
+        const authors = await authorModel.findAll();
+        res.render('create', {authors});
+    }
+
     async createNewArticle(req, res) {
-        if(req.method === 'GET') {
-            return res.render('create');
-        }
 
         const newArticle = {
             name: req.body.name,
@@ -26,7 +30,11 @@ class articleAdminController extends articleController {
 
         if (req.method === 'GET') {
             const article = await articleModel.findById(articleId);
-            return res.render('edit', { article })
+            if (article) {
+                return res.render('edit', { article });
+            } else {
+                return res.status(404).send('Article not found');
+            }
         }
 
         const updates = req.body;

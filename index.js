@@ -30,7 +30,6 @@ app.engine('hbs', hbsInstance.engine);
 app.use(express.static('public'));
 
 // Middleware
-app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(sessions({
@@ -41,14 +40,14 @@ app.use(sessions({
 }));
 
 // Routes
+const adminRoutes = require('./routes/admin');
 const articleRoutes = require('./routes/articles');
 const authorRoutes = require('./routes/authors');
 const userRoutes = require('./routes/user');
-const adminRoutes = require('./routes/admin');
+app.use('/', adminRoutes);
 app.use('/', articleRoutes);
 app.use('/', authorRoutes);
 app.use('/', userRoutes);
-app.use('/', adminRoutes);
 
 // App start point 
 app.listen(3025, () => {

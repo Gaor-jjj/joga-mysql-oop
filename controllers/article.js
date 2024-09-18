@@ -15,11 +15,14 @@ class articleController {
     } 
 
     async getArticleBySlug(req, res) {
-        const article = await articleModel.findOne(req.params.slug)
-        res.status(200).render('article', {
-            article,
+        const article = await articleModel.findOne(req.params.slug);
+        if (!article) {
+            return res.status(404).send('Article not found');
+        }
+        res.render('article', {
+            article: article,
             user: req.session.user
-        })
+        });
     }
 } 
 

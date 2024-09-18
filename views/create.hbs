@@ -1,17 +1,29 @@
-<h1>Create New Article</h1>
+<h1>Create a New Article</h1>
 
 <form action="/article/create" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required>
-
-    <label for="slug">Slug:</label>
-    <input type="text" name="slug" id="slug" required>
-
-    <label for="image">Image URL:</label>
-    <input type="text" name="image" id="image">
-
-    <label for="body">Body:</label>
-    <textarea name="body" id="body" required></textarea>
-
+    <div>
+        <label for="name">Article Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="slug">Article Slug:</label>
+        <input type="text" id="slug" name="slug" required>
+    </div>
+    <div>
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image">
+    </div>
+    <div>
+        <label for="body">Article Body:</label>
+        <textarea id="body" name="body" required></textarea>
+    </div>
+    <div>
+        <label for="author_id">Author:</label>
+        <select id="author_id" name="author_id" required>
+            {{#each authors}}
+                <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
     <button type="submit">Create Article</button>
 </form>
