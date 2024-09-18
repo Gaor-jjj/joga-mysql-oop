@@ -5,6 +5,10 @@ const articleModel = new articleDbModel()
 class articleAdminController extends articleController {
 
     async createNewArticle(req, res) {
+        if(req.method === 'GET') {
+            return res.render('create');
+        }
+
         const newArticle = {
             name: req.body.name,
             slug: req.body.slug,
@@ -14,14 +18,17 @@ class articleAdminController extends articleController {
             author_id: req.body.author_id
         }
         const articleId = await articleModel.create(newArticle)
-        res.status(201).json({
-            message: `created article with id ${articleId}`,
-            article: {id: articleId, ...newArticle}
-        })
+        res.redirect(`/article/${newArticle.slug}`);
     }
 
     async updateArticle(req, res) {
         const articleId = req.params.id;
+
+        if (req.method === 'GET') {
+            const article = await articleModel.findById(articleId);
+            return res.render('edit', { article })
+        }
+
         const updates = req.body;
         const updatedArticle = {};
         for (const key in updates) {
@@ -30,18 +37,13 @@ class articleAdminController extends articleController {
             }
         }
         await articleModel.update(articleId, updatedArticle)
-        res.status(200).json({
-            message: `updated article with id ${articleId}`,
-            article: {id: articleId, ...updatedArticle}
-        })
+        res.redirect(`/article/${updatedArticle.slug}`)
     }
 
     async deleteArticle(req, res) {
         const articleId = req.params.id;
         await articleModel.delete(articleId)
-        res.status(200).json({
-            message: `deleted article with id ${articleId}`
-        })
+        res.redirect('/');
     }
 }
 

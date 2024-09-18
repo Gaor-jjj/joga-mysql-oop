@@ -8,12 +8,18 @@ class articleController {
 
     async getAllArticles(req, res) {
         const articles = await articleModel.findAll()
-        res.status(200).render('index', {articles: articles})
+        res.status(200).render('index', {
+            articles,
+            user: req.session.user
+        })
     } 
 
     async getArticleBySlug(req, res) {
         const article = await articleModel.findOne(req.params.slug)
-        res.status(200).render('article', {article: article})
+        res.status(200).render('article', {
+            article,
+            user: req.session.user
+        })
     }
 } 
 

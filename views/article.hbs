@@ -2,4 +2,12 @@
     <h1>{{name}}</h1>
     <p><img src="/images/{{image}}" alt=""></p>
     {{{body}}}
+    {{#if user}}
+        {{#ifEquals user.role 'admin'}}
+            <a href="/article/edit/{{id}}">Edit</a>
+            <form action="/article/delete/{{id}}" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        {{/ifEquals}}
+    {{/if}}
 {{/article}}

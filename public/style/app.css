@@ -27,6 +27,10 @@
     padding: 12px;
 }
 
+.login {
+    margin-bottom: 20px;
+}
+
 body {
     background-color: #eee;
     font-family: 'Noto Sans', sans-serif;
