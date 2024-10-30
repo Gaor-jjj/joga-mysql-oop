@@ -18,3 +18,7 @@ build/
 # Ignore OS-specific files
 .DS_Store
 Thumbs.db
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
