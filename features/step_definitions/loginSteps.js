@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 
 let browser, page;
 
-Given('I am on the homepage', async function () {
+Given('I start on the homepage', async function () {
     browser = await puppeteer.launch({ headless: true });
     page = await browser.newPage();
     await page.goto('http://localhost:3025');
